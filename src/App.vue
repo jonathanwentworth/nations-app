@@ -1,14 +1,22 @@
 <template>
+
   <Navbar />
+
   <div class="container">
+    <!-- call inputChanged function on event emitted from SearchBar component -->
     <SearchBar @input="inputChanged" />
+    
+    <!-- pass data to child component using :nations="nations" -->
     <NationGrid :nations="nations" :search="search" />
   </div>
+
 </template>
 
 <script>
+// using axios to get API data
 import axios from 'axios';
 
+// import components
 import Navbar from './components/Navbar.vue'
 import NationGrid from './components/NationGrid.vue'
 import SearchBar from './components/SearchBar.vue'
@@ -26,24 +34,27 @@ export default {
       search: ''
     }
   },
+  // fetch API data. mounted() executes before creating the component
   async mounted() {
-        try {
-            const res = await axios.get('https://restcountries.eu/rest/v2/all');
-            this.nations = res.data;
-        }
-        catch(e) {
-            console.log(e);
-        }
-    },
-    methods: {
-      inputChanged(search) {
-        this.search = search;
+      try {
+          const res = await axios.get('https://restcountries.eu/rest/v2/all');
+          this.nations = res.data;
       }
+      catch(e) {
+          console.log(e);
+      }
+  },
+  // receiving search data emitted from SearchBar component
+  methods: {
+    inputChanged(search) {
+      this.search = search;
     }
+  }
 }
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -3,10 +3,14 @@
     <div class="nation-card">
         <img :src="nation.flag" alt="" class="flag-image">
         <div class="nation-card__info">
+
+            <!-- nation details
+                toLocaleString() adds commas to numbers -->
             <h3>{{nation.name}}</h3>
             <p><strong>Population:</strong> {{nation.population.toLocaleString()}}</p>
             <p><strong>Region:</strong> {{nation.region}}</p>
             <p><strong>Capital:</strong> {{nation.capital}}</p>
+
         </div>
     </div>
 

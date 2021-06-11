@@ -1,7 +1,11 @@
 <template>
 
     <div class="search">
+
+        <!-- v-model binds data to searchTerms
+            @input calls the method search() in order to emit data to parent component -->
         <input @input="search" type="text" class="searchTerm" placeholder="Search for nation..." v-model="searchTerm">
+
     </div>
 
 </template>
@@ -18,6 +22,7 @@ export default {
         }
     },
     methods: {
+        // emit search query data to parent component
         search() {
             this.$emit('input', this.searchTerm);
         }
@@ -25,7 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .search {
     margin: 50px 0;

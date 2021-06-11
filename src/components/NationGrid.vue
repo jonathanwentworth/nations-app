@@ -1,7 +1,11 @@
 <template>
 
     <div class="nation-grid">
+
+        <!-- loop through nations
+            nations array received as props from parent component -->
         <NationCard v-for="nation in filterNations" :key="nation.numericCode" :nation="nation"  />
+
     </div>
 
 </template>
@@ -24,6 +28,7 @@ export default {
 
     },
     computed: {
+        // filter nations based on search query
         filterNations: function() {
             return this.nations.filter((nation) => {
                 return nation.name.toLowerCase().match(this.search.toLowerCase());

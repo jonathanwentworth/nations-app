@@ -1,24 +1,19 @@
 <template>
   <Navbar />
   <div class="container">
-    <div class="searchfilter">
-      <SearchBar />
-    </div>
-    <NationCard />
+    <NationCards />
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
-import SearchBar from './components/SearchBar.vue'
-import NationCard from './components/NationCard.vue'
+import NationCards from './components/NationCards.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    SearchBar,
-    NationCard
+    NationCards
   }
 }
 </script>

@@ -1,20 +1,45 @@
 <template>
   <Navbar />
   <div class="container">
-    <NationCards />
+    <SearchBar @input="inputChanged" />
+    <NationGrid :nations="nations" :search="search" />
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 import Navbar from './components/Navbar.vue'
-import NationCards from './components/NationCards.vue'
+import NationGrid from './components/NationGrid.vue'
+import SearchBar from './components/SearchBar.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    NationCards
-  }
+    NationGrid,
+    SearchBar
+  },
+  data: function() {
+    return {
+      nations: [],
+      search: ''
+    }
+  },
+  async mounted() {
+        try {
+            const res = await axios.get('https://restcountries.eu/rest/v2/all');
+            this.nations = res.data;
+        }
+        catch(e) {
+            console.log(e);
+        }
+    },
+    methods: {
+      inputChanged(search) {
+        this.search = search;
+      }
+    }
 }
 </script>
 

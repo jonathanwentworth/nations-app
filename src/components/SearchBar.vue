@@ -1,8 +1,7 @@
 <template>
 
     <div class="search">
-        <input type="text" class="searchTerm" placeholder="What are you looking for?" v-model="searchTerm">
-        <p>Input: {{searchTerm}}</p>
+        <input @input="search" type="text" class="searchTerm" placeholder="Search for nation..." v-model="searchTerm">
     </div>
 
 </template>
@@ -17,11 +16,20 @@ export default {
         return {
             searchTerm: ""
         }
+    },
+    methods: {
+        search() {
+            this.$emit('input', this.searchTerm);
+        }
     }
 }
 </script>
 
 <style>
+
+.search {
+    margin: 50px 0;
+}
 
 .searchTerm {
     padding: 18px 24px;

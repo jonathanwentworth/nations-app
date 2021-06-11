@@ -2,15 +2,17 @@
   <div class="nation-card">
       <img src="" alt="">
       <div class="nation-card__info">
-          <h3>Germany</h3>
-          <p>Population: 2312123</p>
-          <p>Region: Europe</p>
-          <p>Capital: Berlin</p>
+          <h3>{{name}}</h3>
+          <p>Population: {{population}}</p>
+          <p>Region: {{region}}</p>
+          <p>Capital: {{capital}}</p>
       </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "NationCard",
     props: {
@@ -18,7 +20,23 @@ export default {
     },
     data: function() {
         return {
+            name: "",
+            population: 0,
+            region: "",
+            capital: ""
+        }
+    },
+    async mounted() {
+        try {
+            const res = await axios.get('https://restcountries.eu/rest/v2/alpha/col');
 
+            this.name = res.data.name;
+            this.population = res.data.population;
+            this.region = res.data.region;
+            this.capital = res.data.capital;
+        }
+        catch(e) {
+            console.log(e);
         }
     }
 }

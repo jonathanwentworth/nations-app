@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?" v-model="search">
-        <p>Input: {{search}}</p>
+        <p>Search Terms: {{search}}</p>
     </div>
     <div class="nation-grid">
         <div class="nation-card" v-for="nation in filterNations" :key="nation.numericCode">
@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         filterNations() {
-            return this.nations.filter(nation => nation.name.includes(this.search));
+            return this.nations.filter(nation => nation.name.toLowerCase().includes(this.search.toLowerCase()));
         }
     }
 }

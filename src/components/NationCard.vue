@@ -1,13 +1,15 @@
 <template>
-  <div class="nation-card">
-      <img src="" alt="">
-      <div class="nation-card__info">
-          <h3>{{name}}</h3>
-          <p>Population: {{population}}</p>
-          <p>Region: {{region}}</p>
-          <p>Capital: {{capital}}</p>
-      </div>
-  </div>
+    <div class="nation-grid">
+        <div class="nation-card" v-for="nation of nations" :key="nation.numericCode">
+            <img :src="nation.flag" alt="" class="flag-image">
+            <div class="nation-card__info">
+                <h3>Name: {{nation.name}}</h3>
+                <p>Population: {{nation.population}}</p>
+                <p>Region: {{nation.region}}</p>
+                <p>Capital: {{nation.capital}}</p>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -20,20 +22,14 @@ export default {
     },
     data: function() {
         return {
-            name: "",
-            population: 0,
-            region: "",
-            capital: ""
+            nations: {}
         }
     },
     async mounted() {
         try {
-            const res = await axios.get('https://restcountries.eu/rest/v2/alpha/col');
+            const res = await axios.get('https://restcountries.eu/rest/v2/all');
 
-            this.name = res.data.name;
-            this.population = res.data.population;
-            this.region = res.data.region;
-            this.capital = res.data.capital;
+            this.nations = res.data;
         }
         catch(e) {
             console.log(e);
@@ -44,11 +40,26 @@ export default {
 
 <style>
 
+.nation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3em;
+    grid-row-gap: 3em;
+}
+
 .nation-card {
     background: white;
-    padding: 40px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    border-radius: 2px;
+    border-radius: 5px;
+}
+
+.nation-card__info {
+    padding: 30px;
+}
+
+.flag-image {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
 }
 
 </style>

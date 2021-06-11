@@ -37,9 +37,16 @@ body {
   background-color: hsl(0, 0%, 98%);
 }
 
+p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
 .container {
   max-width: 1440px;
   padding: 0 80px;
+  margin: 0 auto;
 }
 
 .searchfilter {

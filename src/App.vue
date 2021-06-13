@@ -5,9 +5,9 @@
   <div class="container">
     <!-- call inputChanged function on event emitted from SearchBar component -->
     <SearchBar @input="inputChanged" />
-    
+    <NationFilter @select-region="selectRegion" />
     <!-- pass data to child component using :nations="nations" -->
-    <NationGrid :nations="nations" :search="search" />
+    <NationGrid :nations="nations" :search="search" :region="region" />
   </div>
 
 </template>
@@ -20,18 +20,21 @@ import axios from 'axios';
 import Navbar from './components/Navbar.vue'
 import NationGrid from './components/NationGrid.vue'
 import SearchBar from './components/SearchBar.vue'
+import NationFilter from './components/NationFilter.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
     NationGrid,
-    SearchBar
+    SearchBar,
+    NationFilter
   },
   data: function() {
     return {
       nations: [],
-      search: ''
+      search: '',
+      region: ''
     }
   },
   // fetch API data. mounted() executes before creating the component
@@ -48,6 +51,9 @@ export default {
   methods: {
     inputChanged(search) {
       this.search = search;
+    },
+    selectRegion(region) {
+      this.region = region;
     }
   }
 }
@@ -66,6 +72,7 @@ export default {
 body {
   margin: 0;
   background-color: hsl(0, 0%, 98%);
+  padding-bottom: 100px;
 }
 
 p {

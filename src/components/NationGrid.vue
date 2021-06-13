@@ -22,6 +22,9 @@ export default {
         nations: [],
         search: {
             type: String
+        },
+        region: {
+            type: String
         }
     },
     data: function() {
@@ -31,7 +34,12 @@ export default {
         // filter nations based on search query
         filterNations: function() {
             return this.nations.filter((nation) => {
-                return nation.name.toLowerCase().match(this.search.toLowerCase());
+                if (nation.region === this.region || this.region === 'all' || this.region === '' || this.region === null) {
+                    return nation.name.toLowerCase().includes(this.search.toLowerCase());
+                } else {
+                    return false;
+                }
+                
             });
         }
     },

@@ -31,7 +31,8 @@ export default {
 <style scoped>
 
 .search {
-    margin: 50px 0;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
 .searchTerm {

@@ -13,9 +13,7 @@
 <script>
 export default {
     name: 'SearchBar',
-    props: {
-
-    },
+    props: {},
     data: function() {
         return {
             searchTerm: ""
